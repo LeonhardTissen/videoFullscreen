@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Video Fullscreen</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div id="video" class="videoContainer" onclick="fullscreenVideo(event)">
+		<img class="videoPlay" src="play.svg" alt="Play Button">
+		<video class="videoSource" src="video.mp4" loop></video>
+	</div>
+	<script>
+		function fullscreenVideo(ev) {
+			// Get video within the container
+			const video = ev.target.querySelector('.videoSource');
+
+			// If fullscreen isn't supported, just play the video as is
+			if (!video.requestFullscreen) {
+				console.error("Fullscreen isn't supported, only doing playback.");
+				video.play();
+				return;
+			}
+
+			// Enter fullscreen and play the video
+			video.requestFullscreen()
+				.then(() => video.play())
+				.catch(error => console.error('Error entering fullscreen:', error))
+		}
+	</script>
+</body>
+</html>
